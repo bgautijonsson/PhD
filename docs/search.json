@@ -1,0 +1,30 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Improved 21st century projections of sub-daily extreme precipitation by spatio-temporal recalibration",
+    "section": "",
+    "text": "This is a Quarto book.\nTo learn more about Quarto books visit https://quarto.org/docs/books.\n\n1 + 1\n\n[1] 2"
+  },
+  {
+    "objectID": "Projects/Modeling/Max & Smooth/index.html",
+    "href": "Projects/Modeling/Max & Smooth/index.html",
+    "title": "1  Untitled",
+    "section": "",
+    "text": "d <- here(\"Data\", \"yearly_maximum_per_hour.csv\") |> \n    read_csv() |> \n    filter(year <= 2040, proj_x <= 10, proj_y <= 10) |> \n    arrange(station, year)\n\nRows: 2723040 Columns: 7\n── Column specification ────────────────────────────────────────────────────────\nDelimiter: \",\"\ndbl (7): year, station, proj_x, proj_y, latitude, longitude, precip\n\nℹ Use `spec()` to retrieve the full column specification for this data.\nℹ Specify the column types or set `show_col_types = FALSE` to quiet this message."
+  },
+  {
+    "objectID": "Projects/Modeling/Max & Smooth/index.html#sample-theta-from-marginal",
+    "href": "Projects/Modeling/Max & Smooth/index.html#sample-theta-from-marginal",
+    "title": "1  Untitled",
+    "section": "5.1 1. Sample \\(\\theta\\) from marginal",
+    "text": "5.1 1. Sample \\(\\theta\\) from marginal\n\\[\n\\pi(\\theta \\vert \\hat\\eta) \\propto \\pi(\\theta) \\frac{\\pi(\\hat\\eta\\vert x, \\theta)\\pi(x\\vert\\theta)}{\\pi(x\\vert\\hat\\eta, \\theta)}\n\\]\nWe need to know three conditional distributions:\n\n5.1.1 1. $p(x |, y)\n\\[\np(x | \\theta, y) = N(x | \\mu_{x|y}, Q_{x|y})\n\\]\n\\[\n\\mu_{x|y} = Q^{-1}_{x|y}(Q_x\\mu_x + Z^TQ_\\varepsilon y) \\\\\nQ_{x|y} = Q_x + Z^TQ_\\varepsilon Z\n\\]\nIn code, we get:\n\nQ_x_cond_y <- Q_x + t(Z) %*% Q_e %*% Z\nmu_x_cond_y <- solve(Q_x_cond_y, Q_x %*% mu_x + t(Z) %*% Q_e %*% y)\n\nchol_Q_x_cond_y <- Cholesky(Q_x_cond_y)\n\npi_x_cond_theta_y <- function(x, mu_x_cond_y, chol_Q_x_cond_y) {\n    dmvn.sparse(\n        x = t(x),\n        mu = as.vector(mu_x_cond_y),\n        CH = chol_Q_x_cond_y,\n        prec = TRUE,\n        log = TRUE\n    )\n}\n\npi_x_cond_theta_y(x = x, mu_x_cond_y = mu_x_cond_y, chol_Q_x_cond_y = chol_Q_x_cond_y)\n\n[1] -106542.4\n\n\n\n\n5.1.2 2. \\(p(y |x, \\theta)\\)\n\\[\np(y | x, \\theta) = N(y | Zx, Q_\\varepsilon^{-1})\n\\]\nIn code, we get:\n\nQ_e <- bdiag(d_fit$hess)\nchol_Q_e <- Cholesky(Q_e)\n\n\npi_y_cond_x_theta <- function(y, Z, x, chol_Q_e) {\n    dmvn.sparse(\n        x = t(y), \n        mu = as.vector(Z %*% x), \n        CH = chol_Q_e,\n        prec = TRUE,\n        log = TRUE\n    )\n}\n\npi_y_cond_x_theta(y = y, Z = Z, x = x, chol_Q_e = chol_Q_e)\n\n[1] -105787.3\n\n\n\n\n5.1.3 3. \\(p(x | \\theta)\\)\n\\[\np(x | \\theta)  = N(x | \\mu_x, Q_x^{-1})\n\\]\n\npi_x_cond_theta <- function(x, mu_x, chol_Q_x) {\n    dmvn.sparse(x = t(x),\n                mu = as.vector(mu_x),\n                CH = chol_Q_x,\n                prec = TRUE,\n                log = TRUE)\n}\n\npi_x_cond_theta(x = x, mu_x = mu_x, chol_Q_x = chol_Q_x)\n\n[1] -659.8415\n\n\n\npi_theta <- function(theta) 1\npi_theta_cond_y <- function(theta, y, x, mu_x, chol_Q_x, Z, chol_Q_e,\n                            mu_x_cond_y, chol_Q_x_cond_y) {\n    pi_theta(theta) * \n        pi_y_cond_x_theta(y = y, Z = Z, x = x, chol_Q_e = chol_Q_e) * \n        pi_x_cond_theta(x = x, mu_x = mu_x, chol_Q_x = chol_Q_x) /\n        pi_x_cond_theta_y(x = x, mu_x_cond_y = mu_x_cond_y, chol_Q_x_cond_y = chol_Q_x_cond_y)\n}\n\npi_theta_cond_y(\n    theta = theta, \n    y = y,\n    x = x, \n    mu_x = mu_x, \n    chol_Q_x = chol_Q_x, \n    Z = Z,\n    chol_Q_e, \n    mu_x_cond_y,\n    chol_Q_x_cond_y = chol_Q_x_cond_y\n)\n\n[1] -655.1651"
+  },
+  {
+    "objectID": "Projects/Modeling/Max & Smooth/index.html#sample-mu_x-and-q_x-given-theta-and-hateta",
+    "href": "Projects/Modeling/Max & Smooth/index.html#sample-mu_x-and-q_x-given-theta-and-hateta",
+    "title": "1  Untitled",
+    "section": "5.2 2. Sample \\(\\mu_x\\) and \\(Q_x\\) given \\(\\theta\\) and \\(\\hat\\eta\\)",
+    "text": "5.2 2. Sample \\(\\mu_x\\) and \\(Q_x\\) given \\(\\theta\\) and \\(\\hat\\eta\\)\n\nQ_x_cond_y <- Q_x + t(Z) %*% Q_e %*% Z\nchol_Q_x_cond_y <- Cholesky(Q_x_cond_y)\n\nmu_x_cond_y <- solve(Q_x_cond_y, Q_x %*% mu_x + t(Z) %*% Q_e %*% y)\n\n\nrmvn.sparse(\n    n = 1,\n    mu = mu_x_cond_y,\n    CH = chol_Q_x_cond_y,\n    prec = TRUE\n)\n\n1 x 4 Matrix of class \"dgeMatrix\"\n         [,1]      [,2]       [,3]      [,4]\n[1,] 2.512701 -1.018856 -0.3164546 0.3558238"
+  }
+]
