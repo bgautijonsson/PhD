@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Improved 21st century projections of sub-daily extreme precipitation by spatio-temporal recalibration - 1&nbsp; Untitled</title>
+<title>Improved 21st century projections of sub-daily extreme precipitation by spatio-temporal recalibration - 1&nbsp; Max &amp; Smooth</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -128,7 +128,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Untitled</span></h1>
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Max &amp; Smooth</span></h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -142,6 +142,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="../../../">Improved 21st century projections of sub-daily extreme precipitation by spatio-temporal recalibration</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/bgautijonsson/phd" title="Source Code" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
+</div>
     </div>
       </div>
       <div class="mt-2 flex-shrink-0 align-items-center">
@@ -156,11 +159,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <a href="../../../index.html" class="sidebar-item-text sidebar-link">Preface</a>
   </div>
 </li>
+        <li class="sidebar-item sidebar-item-section">
+    <div class="sidebar-item-container"> 
+        <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">Models</a>
+      <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+        <i class="bi bi-chevron-right ms-2"></i>
+      </a>
+    </div>
+    <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../Projects/Modeling/Max &amp; Smooth/index.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Untitled</span></a>
+  <a href="../../../Projects/Modeling/Max &amp; Smooth/index.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Max &amp; Smooth</span></a>
   </div>
 </li>
+    </ul>
+  </li>
     </ul>
     </div>
 </nav>
@@ -170,18 +183,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#data" id="toc-data" class="nav-link active" data-scroll-target="#data"> <span class="header-section-number">2</span> Data</a></li>
-  <li><a href="#fit-gev-with-trend" id="toc-fit-gev-with-trend" class="nav-link" data-scroll-target="#fit-gev-with-trend"> <span class="header-section-number">3</span> Fit GEV with trend</a></li>
-  <li><a href="#test-run" id="toc-test-run" class="nav-link" data-scroll-target="#test-run"> <span class="header-section-number">4</span> Test run</a></li>
-  <li><a href="#sampling-from-the-posterior" id="toc-sampling-from-the-posterior" class="nav-link" data-scroll-target="#sampling-from-the-posterior"> <span class="header-section-number">5</span> Sampling from the posterior</a>
+  <li><a href="#data" id="toc-data" class="nav-link active" data-scroll-target="#data"> <span class="header-section-number">1.1</span> Data</a></li>
+  <li><a href="#fit-gev-with-trend" id="toc-fit-gev-with-trend" class="nav-link" data-scroll-target="#fit-gev-with-trend"> <span class="header-section-number">1.2</span> Fit GEV with trend</a></li>
+  <li><a href="#test-run" id="toc-test-run" class="nav-link" data-scroll-target="#test-run"> <span class="header-section-number">1.3</span> Test run</a></li>
+  <li><a href="#sampling-from-the-posterior" id="toc-sampling-from-the-posterior" class="nav-link" data-scroll-target="#sampling-from-the-posterior"> <span class="header-section-number">1.4</span> Sampling from the posterior</a>
   <ul class="collapse">
-  <li><a href="#sample-theta-from-marginal" id="toc-sample-theta-from-marginal" class="nav-link" data-scroll-target="#sample-theta-from-marginal"> <span class="header-section-number">5.1</span> 1. Sample <span class="math inline">\(\theta\)</span> from marginal</a>
-  <ul class="collapse">
-  <li><a href="#px-y" id="toc-px-y" class="nav-link" data-scroll-target="#px-y"> <span class="header-section-number">5.1.1</span> 1. $p(x |, y)</a></li>
-  <li><a href="#py-x-theta" id="toc-py-x-theta" class="nav-link" data-scroll-target="#py-x-theta"> <span class="header-section-number">5.1.2</span> 2. <span class="math inline">\(p(y |x, \theta)\)</span></a></li>
-  <li><a href="#px-theta" id="toc-px-theta" class="nav-link" data-scroll-target="#px-theta"> <span class="header-section-number">5.1.3</span> 3. <span class="math inline">\(p(x | \theta)\)</span></a></li>
-  </ul></li>
-  <li><a href="#sample-mu_x-and-q_x-given-theta-and-hateta" id="toc-sample-mu_x-and-q_x-given-theta-and-hateta" class="nav-link" data-scroll-target="#sample-mu_x-and-q_x-given-theta-and-hateta"> <span class="header-section-number">5.2</span> 2. Sample <span class="math inline">\(\mu_x\)</span> and <span class="math inline">\(Q_x\)</span> given <span class="math inline">\(\theta\)</span> and <span class="math inline">\(\hat\eta\)</span></a></li>
+  <li><a href="#sample-theta-from-marginal" id="toc-sample-theta-from-marginal" class="nav-link" data-scroll-target="#sample-theta-from-marginal"> <span class="header-section-number">1.4.1</span> 1. Sample <span class="math inline">\(\theta\)</span> from marginal</a></li>
+  <li><a href="#sample-mu_x-and-q_x-given-theta-and-hateta" id="toc-sample-mu_x-and-q_x-given-theta-and-hateta" class="nav-link" data-scroll-target="#sample-mu_x-and-q_x-given-theta-and-hateta"> <span class="header-section-number">1.4.2</span> 2. Sample <span class="math inline">\(\mu_x\)</span> and <span class="math inline">\(Q_x\)</span> given <span class="math inline">\(\theta\)</span> and <span class="math inline">\(\hat\eta\)</span></a></li>
   </ul></li>
   </ul>
 </nav>
@@ -191,7 +199,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Untitled</span></h1>
+<h1 class="title d-none d-lg-block"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Max &amp; Smooth</span></h1>
 </div>
 
 
@@ -205,193 +213,214 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </header>
 
-<section id="data" class="level1" data-number="2">
-<h1 data-number="2"><span class="header-section-number">2</span> Data</h1>
-<div class="cell" data-hash="index_cache/html/unnamed-chunk-2_4952674015883db1867f2a7f6ea2a891">
+<section id="data" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="data"><span class="header-section-number">1.1</span> Data</h2>
+<div class="cell" data-hash="index_cache/html/unnamed-chunk-2_aea03f8ddfc68443b5e1057e60cc9526">
+<details open="">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">here</span>(<span class="st">"Data"</span>, <span class="st">"yearly_maximum_per_hour.csv"</span>) <span class="sc">|&gt;</span> </span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">read_csv</span>() <span class="sc">|&gt;</span> </span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(year <span class="sc">&lt;=</span> <span class="dv">2040</span>, proj_x <span class="sc">&lt;=</span> <span class="dv">10</span>, proj_y <span class="sc">&lt;=</span> <span class="dv">10</span>) <span class="sc">|&gt;</span> </span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">arrange</span>(station, year)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Rows: 2723040 Columns: 7
-── Column specification ────────────────────────────────────────────────────────
-Delimiter: ","
-dbl (7): year, station, proj_x, proj_y, latitude, longitude, precip
-
-ℹ Use `spec()` to retrieve the full column specification for this data.
-ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-</div>
+</details>
 </div>
 </section>
-<section id="fit-gev-with-trend" class="level1" data-number="3">
-<h1 data-number="3"><span class="header-section-number">3</span> Fit GEV with trend</h1>
+<section id="fit-gev-with-trend" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="fit-gev-with-trend"><span class="header-section-number">1.2</span> Fit GEV with trend</h2>
 <div class="cell" data-hash="index_cache/html/unnamed-chunk-3_ca3b77ffc96b63a2e193c5c884f440b7">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>log_lik_trend <span class="ot">&lt;-</span> <span class="cf">function</span>(dat, par) {</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    y <span class="ot">&lt;-</span> dat<span class="sc">$</span>y</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    t <span class="ot">&lt;-</span> dat<span class="sc">$</span>year</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    t <span class="ot">&lt;-</span> t <span class="sc">-</span> <span class="dv">1981</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    mu0 <span class="ot">&lt;-</span> <span class="fu">exp</span>(par[<span class="dv">1</span>])</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    sigma <span class="ot">&lt;-</span> <span class="fu">exp</span>(par[<span class="dv">2</span>]) <span class="sc">*</span> mu0</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    xi <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">+</span> <span class="fu">exp</span>(<span class="sc">-</span>par[<span class="dv">3</span>])) <span class="sc">-</span> <span class="fl">0.5</span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    delta <span class="ot">&lt;-</span> <span class="fl">0.016</span> <span class="sc">*</span> <span class="dv">1</span> <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">+</span> <span class="fu">exp</span>(<span class="sc">-</span>par[<span class="dv">4</span>])) <span class="sc">-</span> <span class="fl">0.008</span></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    mu <span class="ot">&lt;-</span> mu0 <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">+</span> delta <span class="sc">*</span> t)</span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    m <span class="ot">&lt;-</span> <span class="fu">length</span>(y)</span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    z <span class="ot">&lt;-</span> (y <span class="sc">-</span> mu) <span class="sc">/</span> sigma</span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="fu">any</span>(<span class="dv">1</span> <span class="sc">+</span> xi <span class="sc">*</span> z <span class="sc">&lt;=</span> <span class="dv">0</span>)) <span class="fu">return</span>(<span class="cn">NA</span>)</span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>    out <span class="ot">&lt;-</span> <span class="sc">-</span> m <span class="sc">*</span> <span class="fu">log</span>(sigma) </span>
-<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>    out <span class="ot">&lt;-</span> out <span class="sc">-</span> (<span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span><span class="sc">/</span>xi) <span class="sc">*</span> <span class="fu">sum</span>(<span class="fu">log</span>(<span class="dv">1</span> <span class="sc">+</span> xi <span class="sc">*</span> z))</span>
-<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>    out <span class="ot">&lt;-</span> out <span class="sc">-</span> <span class="fu">sum</span>((<span class="dv">1</span> <span class="sc">+</span> xi <span class="sc">*</span> z)<span class="sc">^</span>{<span class="sc">-</span><span class="dv">1</span><span class="sc">/</span>xi})</span>
-<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>    priors <span class="ot">&lt;-</span> <span class="fu">dnorm</span>(par[<span class="dv">1</span>], <span class="at">mean =</span> <span class="fl">2.4</span>, <span class="at">sd =</span> <span class="dv">1</span>, <span class="at">log =</span> T) <span class="sc">+</span> </span>
-<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>        <span class="fu">dnorm</span>(par[<span class="dv">2</span>], <span class="at">mean =</span> <span class="sc">-</span><span class="fl">0.5</span>, <span class="at">sd =</span> <span class="dv">1</span>, <span class="at">log =</span> T) <span class="sc">+</span> </span>
-<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>        <span class="fu">dnorm</span>(par[<span class="dv">3</span>], <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>, <span class="at">log =</span> T) <span class="sc">+</span> </span>
-<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>        <span class="fu">dnorm</span>(par[<span class="dv">4</span>], <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>, <span class="at">log =</span> T)</span>
-<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>    out <span class="ot">&lt;-</span> out <span class="sc">+</span> priors</span>
-<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>    <span class="sc">-</span>out</span>
-<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>log_lik_trend <span class="ot">&lt;-</span> <span class="cf">function</span>(dat, par) {</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    y <span class="ot">&lt;-</span> dat<span class="sc">$</span>y</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    t <span class="ot">&lt;-</span> dat<span class="sc">$</span>year</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    t <span class="ot">&lt;-</span> t <span class="sc">-</span> <span class="dv">1981</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    mu0 <span class="ot">&lt;-</span> <span class="fu">exp</span>(par[<span class="dv">1</span>])</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    sigma <span class="ot">&lt;-</span> <span class="fu">exp</span>(par[<span class="dv">2</span>]) <span class="sc">*</span> mu0</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    xi <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">+</span> <span class="fu">exp</span>(<span class="sc">-</span>par[<span class="dv">3</span>])) <span class="sc">-</span> <span class="fl">0.5</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    delta <span class="ot">&lt;-</span> <span class="fl">0.016</span> <span class="sc">*</span> <span class="dv">1</span> <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">+</span> <span class="fu">exp</span>(<span class="sc">-</span>par[<span class="dv">4</span>])) <span class="sc">-</span> <span class="fl">0.008</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    mu <span class="ot">&lt;-</span> mu0 <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">+</span> delta <span class="sc">*</span> t)</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    m <span class="ot">&lt;-</span> <span class="fu">length</span>(y)</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    z <span class="ot">&lt;-</span> (y <span class="sc">-</span> mu) <span class="sc">/</span> sigma</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="fu">any</span>(<span class="dv">1</span> <span class="sc">+</span> xi <span class="sc">*</span> z <span class="sc">&lt;=</span> <span class="dv">0</span>)) <span class="fu">return</span>(<span class="cn">NA</span>)</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>    out <span class="ot">&lt;-</span> <span class="sc">-</span> m <span class="sc">*</span> <span class="fu">log</span>(sigma) </span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>    out <span class="ot">&lt;-</span> out <span class="sc">-</span> (<span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span><span class="sc">/</span>xi) <span class="sc">*</span> <span class="fu">sum</span>(<span class="fu">log</span>(<span class="dv">1</span> <span class="sc">+</span> xi <span class="sc">*</span> z))</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>    out <span class="ot">&lt;-</span> out <span class="sc">-</span> <span class="fu">sum</span>((<span class="dv">1</span> <span class="sc">+</span> xi <span class="sc">*</span> z)<span class="sc">^</span>{<span class="sc">-</span><span class="dv">1</span><span class="sc">/</span>xi})</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>    priors <span class="ot">&lt;-</span> <span class="fu">dnorm</span>(par[<span class="dv">1</span>], <span class="at">mean =</span> <span class="fl">2.4</span>, <span class="at">sd =</span> <span class="dv">1</span>, <span class="at">log =</span> T) <span class="sc">+</span> </span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>        <span class="fu">dnorm</span>(par[<span class="dv">2</span>], <span class="at">mean =</span> <span class="sc">-</span><span class="fl">0.5</span>, <span class="at">sd =</span> <span class="dv">1</span>, <span class="at">log =</span> T) <span class="sc">+</span> </span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>        <span class="fu">dnorm</span>(par[<span class="dv">3</span>], <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>, <span class="at">log =</span> T) <span class="sc">+</span> </span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>        <span class="fu">dnorm</span>(par[<span class="dv">4</span>], <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>, <span class="at">log =</span> T)</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>    out <span class="ot">&lt;-</span> out <span class="sc">+</span> priors</span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>    <span class="sc">-</span>out</span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <div class="cell" data-hash="index_cache/html/unnamed-chunk-4_0596fdc4a7069311bab4dd49a45d48a2">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>f_trend <span class="ot">&lt;-</span> <span class="cf">function</span>(x, t, mu0, sigma, xi, delta) {</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    t <span class="ot">&lt;-</span> t <span class="sc">-</span> <span class="dv">1981</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    mu <span class="ot">&lt;-</span> mu0 <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">+</span> delta <span class="sc">*</span> t)</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">exp</span>(<span class="sc">-</span>(<span class="dv">1</span> <span class="sc">+</span> xi <span class="sc">*</span> (x <span class="sc">-</span> mu) <span class="sc">/</span> sigma)<span class="sc">^</span>{<span class="sc">-</span><span class="dv">1</span><span class="sc">/</span>xi})</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>fit_gev_trend <span class="ot">&lt;-</span> <span class="cf">function</span>(data, ...) {</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    y <span class="ot">&lt;-</span> data<span class="sc">$</span>y</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    opt <span class="ot">&lt;-</span> <span class="fu">optim</span>(log_lik_trend,</span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>                 <span class="at">par =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="fl">0.1</span>, <span class="dv">0</span>), </span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>                 <span class="at">dat =</span> data,</span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>                 <span class="at">hessian =</span> T)</span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>    par <span class="ot">&lt;-</span> opt<span class="sc">$</span>par</span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>    mu <span class="ot">&lt;-</span> <span class="fu">exp</span>(par[<span class="dv">1</span>])</span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>    sigma <span class="ot">&lt;-</span> <span class="fu">exp</span>(par[<span class="dv">2</span>]) <span class="sc">*</span> mu</span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>    xi <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">+</span> <span class="fu">exp</span>(<span class="sc">-</span>par[<span class="dv">3</span>])) <span class="sc">-</span> <span class="fl">0.5</span></span>
-<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>    delta <span class="ot">&lt;-</span> <span class="fl">0.016</span> <span class="sc">*</span> <span class="dv">1</span> <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">+</span> <span class="fu">exp</span>(<span class="sc">-</span>par[<span class="dv">4</span>])) <span class="sc">-</span> <span class="fl">0.008</span></span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>    hess <span class="ot">&lt;-</span> opt<span class="sc">$</span>hessian </span>
-<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tibble</span>(<span class="at">hess =</span> <span class="fu">list</span>(hess),</span>
-<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>           <span class="at">par =</span> <span class="fu">list</span>(par))</span>
-<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>f_trend <span class="ot">&lt;-</span> <span class="cf">function</span>(x, t, mu0, sigma, xi, delta) {</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    t <span class="ot">&lt;-</span> t <span class="sc">-</span> <span class="dv">1981</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    mu <span class="ot">&lt;-</span> mu0 <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">+</span> delta <span class="sc">*</span> t)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">exp</span>(<span class="sc">-</span>(<span class="dv">1</span> <span class="sc">+</span> xi <span class="sc">*</span> (x <span class="sc">-</span> mu) <span class="sc">/</span> sigma)<span class="sc">^</span>{<span class="sc">-</span><span class="dv">1</span><span class="sc">/</span>xi})</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>fit_gev_trend <span class="ot">&lt;-</span> <span class="cf">function</span>(data, ...) {</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    y <span class="ot">&lt;-</span> data<span class="sc">$</span>y</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    opt <span class="ot">&lt;-</span> <span class="fu">optim</span>(log_lik_trend,</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>                 <span class="at">par =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="fl">0.1</span>, <span class="dv">0</span>), </span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>                 <span class="at">dat =</span> data,</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>                 <span class="at">hessian =</span> T)</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    par <span class="ot">&lt;-</span> opt<span class="sc">$</span>par</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    mu <span class="ot">&lt;-</span> <span class="fu">exp</span>(par[<span class="dv">1</span>])</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>    sigma <span class="ot">&lt;-</span> <span class="fu">exp</span>(par[<span class="dv">2</span>]) <span class="sc">*</span> mu</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>    xi <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">+</span> <span class="fu">exp</span>(<span class="sc">-</span>par[<span class="dv">3</span>])) <span class="sc">-</span> <span class="fl">0.5</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>    delta <span class="ot">&lt;-</span> <span class="fl">0.016</span> <span class="sc">*</span> <span class="dv">1</span> <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">+</span> <span class="fu">exp</span>(<span class="sc">-</span>par[<span class="dv">4</span>])) <span class="sc">-</span> <span class="fl">0.008</span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>    hess <span class="ot">&lt;-</span> opt<span class="sc">$</span>hessian </span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tibble</span>(<span class="at">hess =</span> <span class="fu">list</span>(hess),</span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>           <span class="at">par =</span> <span class="fu">list</span>(par))</span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <div class="cell" data-fig.asp="0.5" data-hash="index_cache/html/unnamed-chunk-5_da98ed1cd816efbe2c3ef68c2ede6983">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>d_fit <span class="ot">&lt;-</span> d <span class="sc">|&gt;</span> </span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(proj_x <span class="sc">&lt;=</span> <span class="dv">10</span>, proj_y <span class="sc">&lt;=</span> <span class="dv">10</span>) <span class="sc">|&gt;</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(year, <span class="at">y =</span> precip, station, proj_x, proj_y) <span class="sc">|&gt;</span> </span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(station, proj_x, proj_y) <span class="sc">|&gt;</span> </span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_modify</span>(fit_gev_trend) <span class="sc">|&gt;</span> </span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ungroup</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>d_fit <span class="ot">&lt;-</span> d <span class="sc">|&gt;</span> </span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(proj_x <span class="sc">&lt;=</span> <span class="dv">10</span>, proj_y <span class="sc">&lt;=</span> <span class="dv">10</span>) <span class="sc">|&gt;</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(year, <span class="at">y =</span> precip, station, proj_x, proj_y) <span class="sc">|&gt;</span> </span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(station, proj_x, proj_y) <span class="sc">|&gt;</span> </span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_modify</span>(fit_gev_trend) <span class="sc">|&gt;</span> </span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ungroup</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <div class="cell" data-hash="index_cache/html/unnamed-chunk-6_c6ba79f55d2d59fde7f71f3efd98e192">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>eta_hat <span class="ot">&lt;-</span> <span class="fu">Matrix</span>(<span class="fu">unlist</span>(d_fit<span class="sc">$</span>par), <span class="at">ncol =</span> <span class="dv">1</span>)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>Q_etay <span class="ot">&lt;-</span> <span class="fu">bdiag</span>(d_fit<span class="sc">$</span>hess)</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>chol_Q_etay <span class="ot">&lt;-</span> <span class="fu">bdiag</span>(d_fit<span class="sc">$</span>hess <span class="sc">|&gt;</span> <span class="fu">map</span>(chol))</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(eta_hat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>eta_hat <span class="ot">&lt;-</span> <span class="fu">Matrix</span>(<span class="fu">unlist</span>(d_fit<span class="sc">$</span>par), <span class="at">ncol =</span> <span class="dv">1</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>Q_etay <span class="ot">&lt;-</span> <span class="fu">bdiag</span>(d_fit<span class="sc">$</span>hess)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>chol_Q_etay <span class="ot">&lt;-</span> <span class="fu">bdiag</span>(d_fit<span class="sc">$</span>hess <span class="sc">|&gt;</span> <span class="fu">map</span>(chol))</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(eta_hat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 400   1</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(Q_etay)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(Q_etay)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 400 400</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(chol_Q_etay)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(chol_Q_etay)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 400 400</code></pre>
 </div>
 </div>
 <div class="cell" data-hash="index_cache/html/unnamed-chunk-7_61958b879c787aed78270a8e29404787">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>eta <span class="ot">&lt;-</span> <span class="fu">Matrix</span>(<span class="dv">0</span>,</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">nrow =</span> <span class="fu">nrow</span>(eta_hat),</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">ncol =</span> <span class="dv">1</span>)</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>Z <span class="ot">&lt;-</span> <span class="fu">Matrix</span>(<span class="at">data =</span> <span class="dv">0</span>, </span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">nrow =</span> <span class="fu">nrow</span>(eta_hat),</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">ncol =</span> <span class="dv">4</span>)</span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>) Z[i <span class="sc">+</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">99</span> <span class="sc">*</span> <span class="dv">4</span>, i] <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>nu <span class="ot">&lt;-</span> <span class="fu">Matrix</span>(<span class="at">data =</span> <span class="dv">0</span>,</span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>             <span class="at">nrow =</span> <span class="dv">4</span>,</span>
-<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>             <span class="at">ncol =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>eta <span class="ot">&lt;-</span> <span class="fu">Matrix</span>(<span class="dv">0</span>,</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">nrow =</span> <span class="fu">nrow</span>(eta_hat),</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">ncol =</span> <span class="dv">1</span>)</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>Z <span class="ot">&lt;-</span> <span class="fu">Matrix</span>(<span class="at">data =</span> <span class="dv">0</span>, </span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">nrow =</span> <span class="fu">nrow</span>(eta_hat),</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">ncol =</span> <span class="dv">4</span>)</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>) Z[i <span class="sc">+</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">99</span> <span class="sc">*</span> <span class="dv">4</span>, i] <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>nu <span class="ot">&lt;-</span> <span class="fu">Matrix</span>(<span class="at">data =</span> <span class="dv">0</span>,</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>             <span class="at">nrow =</span> <span class="dv">4</span>,</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>             <span class="at">ncol =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 </section>
-<section id="test-run" class="level1" data-number="4">
-<h1 data-number="4"><span class="header-section-number">4</span> Test run</h1>
+<section id="test-run" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="test-run"><span class="header-section-number">1.3</span> Test run</h2>
 <div class="cell" data-hash="index_cache/html/unnamed-chunk-8_344de09c6ba78e2617aecd94cb0cb639">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>priors <span class="ot">&lt;-</span> d_fit <span class="sc">|&gt;</span> </span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">unnest</span>(par) <span class="sc">|&gt;</span> </span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(station) <span class="sc">|&gt;</span> </span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">term =</span> <span class="fu">row_number</span>()) <span class="sc">|&gt;</span> </span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ungroup</span>() <span class="sc">|&gt;</span> </span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(term) <span class="sc">|&gt;</span> </span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(<span class="at">mean =</span> <span class="fu">mean</span>(par),</span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>              <span class="at">sd =</span> <span class="fu">sd</span>(par),</span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>              <span class="at">.groups =</span> <span class="st">"drop"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>priors <span class="ot">&lt;-</span> d_fit <span class="sc">|&gt;</span> </span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">unnest</span>(par) <span class="sc">|&gt;</span> </span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(station) <span class="sc">|&gt;</span> </span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">term =</span> <span class="fu">row_number</span>()) <span class="sc">|&gt;</span> </span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ungroup</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(term) <span class="sc">|&gt;</span> </span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(<span class="at">mean =</span> <span class="fu">mean</span>(par),</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>              <span class="at">sd =</span> <span class="fu">sd</span>(par),</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>              <span class="at">.groups =</span> <span class="st">"drop"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <div class="cell" data-hash="index_cache/html/unnamed-chunk-9_fa46953de5140b53c663dcb0d90767af">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> eta_hat</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> nu</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>Q_e <span class="ot">&lt;-</span> Q_etay</span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>Z <span class="ot">&lt;-</span> <span class="fu">Matrix</span>(<span class="at">data =</span> <span class="dv">0</span>, </span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">nrow =</span> <span class="fu">nrow</span>(eta_hat),</span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">ncol =</span> <span class="dv">4</span>)</span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>) Z[i <span class="sc">+</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">99</span> <span class="sc">*</span> <span class="dv">4</span>, i] <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>mu_x <span class="ot">&lt;-</span> <span class="fu">Matrix</span>(priors<span class="sc">$</span>mean)</span>
-<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>Q_x <span class="ot">&lt;-</span> <span class="fu">.sparseDiagonal</span>(<span class="at">n =</span> <span class="fu">nrow</span>(mu_x), <span class="at">x =</span> <span class="dv">1</span> <span class="sc">/</span> priors<span class="sc">$</span>sd<span class="sc">^</span><span class="dv">2</span>)</span>
-<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>chol_Q_x <span class="ot">&lt;-</span> <span class="fu">Cholesky</span>(Q_x)</span>
-<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>yx <span class="ot">&lt;-</span> <span class="fu">rbind</span>(y, x)</span>
-<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>Q_yx_cond_theta <span class="ot">&lt;-</span> <span class="fu">Matrix</span>(<span class="at">data =</span> <span class="dv">0</span>,</span>
-<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>                          <span class="at">nrow =</span> <span class="fu">nrow</span>(y) <span class="sc">+</span> <span class="fu">nrow</span>(x),</span>
-<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>                          <span class="at">ncol =</span> <span class="fu">nrow</span>(y) <span class="sc">+</span> <span class="fu">nrow</span>(x))</span>
-<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Upper left of matrix</span></span>
-<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a>Q_yx_cond_theta[<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(y), <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(y)] <span class="ot">&lt;-</span> Q_e</span>
-<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Upper right of matrix</span></span>
-<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a>Q_yx_cond_theta[<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(y), (<span class="fu">nrow</span>(y) <span class="sc">+</span> <span class="dv">1</span>)<span class="sc">:</span>(<span class="fu">nrow</span>(y) <span class="sc">+</span> <span class="fu">nrow</span>(x))] <span class="ot">&lt;-</span> <span class="sc">-</span>Q_e <span class="sc">%*%</span> Z</span>
-<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Lower left of matrix</span></span>
-<span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a>Q_yx_cond_theta[(<span class="fu">nrow</span>(y) <span class="sc">+</span> <span class="dv">1</span>)<span class="sc">:</span>(<span class="fu">nrow</span>(y) <span class="sc">+</span> <span class="fu">nrow</span>(x)), <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(y)] <span class="ot">&lt;-</span> <span class="sc">-</span> <span class="fu">t</span>(Z) <span class="sc">%*%</span> Q_e</span>
-<span id="cb14-29"><a href="#cb14-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Lower right of matrix</span></span>
-<span id="cb14-30"><a href="#cb14-30" aria-hidden="true" tabindex="-1"></a>Q_yx_cond_theta[(<span class="fu">nrow</span>(y) <span class="sc">+</span> <span class="dv">1</span>)<span class="sc">:</span>(<span class="fu">nrow</span>(y) <span class="sc">+</span> <span class="fu">nrow</span>(x)), (<span class="fu">nrow</span>(y) <span class="sc">+</span> <span class="dv">1</span>)<span class="sc">:</span>(<span class="fu">nrow</span>(y) <span class="sc">+</span> <span class="fu">nrow</span>(x))] <span class="ot">&lt;-</span> Q_x <span class="sc">+</span> <span class="fu">t</span>(Z) <span class="sc">%*%</span> Q_e <span class="sc">%*%</span> Z</span>
-<span id="cb14-31"><a href="#cb14-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-32"><a href="#cb14-32" aria-hidden="true" tabindex="-1"></a>chol_Q_yx_cond_theta <span class="ot">&lt;-</span> <span class="fu">Cholesky</span>(Q_yx_cond_theta)</span>
-<span id="cb14-33"><a href="#cb14-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-34"><a href="#cb14-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-35"><a href="#cb14-35" aria-hidden="true" tabindex="-1"></a>Q_x_cond_y <span class="ot">&lt;-</span> Q_x <span class="sc">+</span> <span class="fu">t</span>(Z) <span class="sc">%*%</span> Q_e <span class="sc">%*%</span> Z</span>
-<span id="cb14-36"><a href="#cb14-36" aria-hidden="true" tabindex="-1"></a>mu_x_cond_y <span class="ot">&lt;-</span> <span class="fu">solve</span>(Q_x_cond_y, Q_x <span class="sc">%*%</span> mu_x <span class="sc">+</span> <span class="fu">t</span>(Z) <span class="sc">%*%</span> Q_e <span class="sc">%*%</span> y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> eta_hat</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> nu</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>Q_e <span class="ot">&lt;-</span> Q_etay</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>Z <span class="ot">&lt;-</span> <span class="fu">Matrix</span>(<span class="at">data =</span> <span class="dv">0</span>, </span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">nrow =</span> <span class="fu">nrow</span>(eta_hat),</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">ncol =</span> <span class="dv">4</span>)</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>) Z[i <span class="sc">+</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">99</span> <span class="sc">*</span> <span class="dv">4</span>, i] <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>mu_x <span class="ot">&lt;-</span> <span class="fu">Matrix</span>(priors<span class="sc">$</span>mean)</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>Q_x <span class="ot">&lt;-</span> <span class="fu">.sparseDiagonal</span>(<span class="at">n =</span> <span class="fu">nrow</span>(mu_x), <span class="at">x =</span> <span class="dv">1</span> <span class="sc">/</span> priors<span class="sc">$</span>sd<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>chol_Q_x <span class="ot">&lt;-</span> <span class="fu">Cholesky</span>(Q_x)</span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>yx <span class="ot">&lt;-</span> <span class="fu">rbind</span>(y, x)</span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>Q_yx_cond_theta <span class="ot">&lt;-</span> <span class="fu">Matrix</span>(<span class="at">data =</span> <span class="dv">0</span>,</span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>                          <span class="at">nrow =</span> <span class="fu">nrow</span>(y) <span class="sc">+</span> <span class="fu">nrow</span>(x),</span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>                          <span class="at">ncol =</span> <span class="fu">nrow</span>(y) <span class="sc">+</span> <span class="fu">nrow</span>(x))</span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Upper left of matrix</span></span>
+<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a>Q_yx_cond_theta[<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(y), <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(y)] <span class="ot">&lt;-</span> Q_e</span>
+<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Upper right of matrix</span></span>
+<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a>Q_yx_cond_theta[<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(y), (<span class="fu">nrow</span>(y) <span class="sc">+</span> <span class="dv">1</span>)<span class="sc">:</span>(<span class="fu">nrow</span>(y) <span class="sc">+</span> <span class="fu">nrow</span>(x))] <span class="ot">&lt;-</span> <span class="sc">-</span>Q_e <span class="sc">%*%</span> Z</span>
+<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Lower left of matrix</span></span>
+<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a>Q_yx_cond_theta[(<span class="fu">nrow</span>(y) <span class="sc">+</span> <span class="dv">1</span>)<span class="sc">:</span>(<span class="fu">nrow</span>(y) <span class="sc">+</span> <span class="fu">nrow</span>(x)), <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(y)] <span class="ot">&lt;-</span> <span class="sc">-</span> <span class="fu">t</span>(Z) <span class="sc">%*%</span> Q_e</span>
+<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Lower right of matrix</span></span>
+<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a>Q_yx_cond_theta[(<span class="fu">nrow</span>(y) <span class="sc">+</span> <span class="dv">1</span>)<span class="sc">:</span>(<span class="fu">nrow</span>(y) <span class="sc">+</span> <span class="fu">nrow</span>(x)), (<span class="fu">nrow</span>(y) <span class="sc">+</span> <span class="dv">1</span>)<span class="sc">:</span>(<span class="fu">nrow</span>(y) <span class="sc">+</span> <span class="fu">nrow</span>(x))] <span class="ot">&lt;-</span> Q_x <span class="sc">+</span> <span class="fu">t</span>(Z) <span class="sc">%*%</span> Q_e <span class="sc">%*%</span> Z</span>
+<span id="cb13-31"><a href="#cb13-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-32"><a href="#cb13-32" aria-hidden="true" tabindex="-1"></a>chol_Q_yx_cond_theta <span class="ot">&lt;-</span> <span class="fu">Cholesky</span>(Q_yx_cond_theta)</span>
+<span id="cb13-33"><a href="#cb13-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-34"><a href="#cb13-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-35"><a href="#cb13-35" aria-hidden="true" tabindex="-1"></a>Q_x_cond_y <span class="ot">&lt;-</span> Q_x <span class="sc">+</span> <span class="fu">t</span>(Z) <span class="sc">%*%</span> Q_e <span class="sc">%*%</span> Z</span>
+<span id="cb13-36"><a href="#cb13-36" aria-hidden="true" tabindex="-1"></a>mu_x_cond_y <span class="ot">&lt;-</span> <span class="fu">solve</span>(Q_x_cond_y, Q_x <span class="sc">%*%</span> mu_x <span class="sc">+</span> <span class="fu">t</span>(Z) <span class="sc">%*%</span> Q_e <span class="sc">%*%</span> y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 </section>
-<section id="sampling-from-the-posterior" class="level1" data-number="5">
-<h1 data-number="5"><span class="header-section-number">5</span> Sampling from the posterior</h1>
-<section id="sample-theta-from-marginal" class="level2" data-number="5.1">
-<h2 data-number="5.1" class="anchored" data-anchor-id="sample-theta-from-marginal"><span class="header-section-number">5.1</span> 1. Sample <span class="math inline">\(\theta\)</span> from marginal</h2>
+<section id="sampling-from-the-posterior" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="sampling-from-the-posterior"><span class="header-section-number">1.4</span> Sampling from the posterior</h2>
+<section id="sample-theta-from-marginal" class="level3" data-number="1.4.1">
+<h3 data-number="1.4.1" class="anchored" data-anchor-id="sample-theta-from-marginal"><span class="header-section-number">1.4.1</span> 1. Sample <span class="math inline">\(\theta\)</span> from marginal</h3>
 <p><span class="math display">\[
 \pi(\theta \vert \hat\eta) \propto \pi(\theta) \frac{\pi(\hat\eta\vert x, \theta)\pi(x\vert\theta)}{\pi(x\vert\hat\eta, \theta)}
 \]</span></p>
 <p>We need to know three conditional distributions:</p>
-<section id="px-y" class="level3" data-number="5.1.1">
-<h3 data-number="5.1.1" class="anchored" data-anchor-id="px-y"><span class="header-section-number">5.1.1</span> 1. $p(x |, y)</h3>
+<section id="px-y" class="level4" data-number="1.4.1.1">
+<h4 data-number="1.4.1.1" class="anchored" data-anchor-id="px-y"><span class="header-section-number">1.4.1.1</span> 1. $p(x |, y)</h4>
 <p><span class="math display">\[
 p(x | \theta, y) = N(x | \mu_{x|y}, Q_{x|y})
 \]</span></p>
@@ -401,115 +430,130 @@ Q_{x|y} = Q_x + Z^TQ_\varepsilon Z
 \]</span></p>
 <p>In code, we get:</p>
 <div class="cell" data-hash="index_cache/html/unnamed-chunk-10_c27e1d73e1d95467d6025f05616e0445">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>Q_x_cond_y <span class="ot">&lt;-</span> Q_x <span class="sc">+</span> <span class="fu">t</span>(Z) <span class="sc">%*%</span> Q_e <span class="sc">%*%</span> Z</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>mu_x_cond_y <span class="ot">&lt;-</span> <span class="fu">solve</span>(Q_x_cond_y, Q_x <span class="sc">%*%</span> mu_x <span class="sc">+</span> <span class="fu">t</span>(Z) <span class="sc">%*%</span> Q_e <span class="sc">%*%</span> y)</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>chol_Q_x_cond_y <span class="ot">&lt;-</span> <span class="fu">Cholesky</span>(Q_x_cond_y)</span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>pi_x_cond_theta_y <span class="ot">&lt;-</span> <span class="cf">function</span>(x, mu_x_cond_y, chol_Q_x_cond_y) {</span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">dmvn.sparse</span>(</span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">x =</span> <span class="fu">t</span>(x),</span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">mu =</span> <span class="fu">as.vector</span>(mu_x_cond_y),</span>
-<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>        <span class="at">CH =</span> chol_Q_x_cond_y,</span>
-<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>        <span class="at">prec =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>        <span class="at">log =</span> <span class="cn">TRUE</span></span>
-<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a><span class="fu">pi_x_cond_theta_y</span>(<span class="at">x =</span> x, <span class="at">mu_x_cond_y =</span> mu_x_cond_y, <span class="at">chol_Q_x_cond_y =</span> chol_Q_x_cond_y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>Q_x_cond_y <span class="ot">&lt;-</span> Q_x <span class="sc">+</span> <span class="fu">t</span>(Z) <span class="sc">%*%</span> Q_e <span class="sc">%*%</span> Z</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>mu_x_cond_y <span class="ot">&lt;-</span> <span class="fu">solve</span>(Q_x_cond_y, Q_x <span class="sc">%*%</span> mu_x <span class="sc">+</span> <span class="fu">t</span>(Z) <span class="sc">%*%</span> Q_e <span class="sc">%*%</span> y)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>chol_Q_x_cond_y <span class="ot">&lt;-</span> <span class="fu">Cholesky</span>(Q_x_cond_y)</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>pi_x_cond_theta_y <span class="ot">&lt;-</span> <span class="cf">function</span>(x, mu_x_cond_y, chol_Q_x_cond_y) {</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">dmvn.sparse</span>(</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">x =</span> <span class="fu">t</span>(x),</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">mu =</span> <span class="fu">as.vector</span>(mu_x_cond_y),</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>        <span class="at">CH =</span> chol_Q_x_cond_y,</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>        <span class="at">prec =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>        <span class="at">log =</span> <span class="cn">TRUE</span></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a><span class="fu">pi_x_cond_theta_y</span>(<span class="at">x =</span> x, <span class="at">mu_x_cond_y =</span> mu_x_cond_y, <span class="at">chol_Q_x_cond_y =</span> chol_Q_x_cond_y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] -106542.4</code></pre>
 </div>
 </div>
 </section>
-<section id="py-x-theta" class="level3" data-number="5.1.2">
-<h3 data-number="5.1.2" class="anchored" data-anchor-id="py-x-theta"><span class="header-section-number">5.1.2</span> 2. <span class="math inline">\(p(y |x, \theta)\)</span></h3>
+<section id="py-x-theta" class="level4" data-number="1.4.1.2">
+<h4 data-number="1.4.1.2" class="anchored" data-anchor-id="py-x-theta"><span class="header-section-number">1.4.1.2</span> 2. <span class="math inline">\(p(y |x, \theta)\)</span></h4>
 <p><span class="math display">\[
 p(y | x, \theta) = N(y | Zx, Q_\varepsilon^{-1})
 \]</span></p>
 <p>In code, we get:</p>
 <div class="cell" data-hash="index_cache/html/unnamed-chunk-11_5fbf5c483ab07f10e165a7264db146fc">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>Q_e <span class="ot">&lt;-</span> <span class="fu">bdiag</span>(d_fit<span class="sc">$</span>hess)</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>chol_Q_e <span class="ot">&lt;-</span> <span class="fu">Cholesky</span>(Q_e)</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>pi_y_cond_x_theta <span class="ot">&lt;-</span> <span class="cf">function</span>(y, Z, x, chol_Q_e) {</span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">dmvn.sparse</span>(</span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">x =</span> <span class="fu">t</span>(y), </span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">mu =</span> <span class="fu">as.vector</span>(Z <span class="sc">%*%</span> x), </span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">CH =</span> chol_Q_e,</span>
-<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>        <span class="at">prec =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>        <span class="at">log =</span> <span class="cn">TRUE</span></span>
-<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a><span class="fu">pi_y_cond_x_theta</span>(<span class="at">y =</span> y, <span class="at">Z =</span> Z, <span class="at">x =</span> x, <span class="at">chol_Q_e =</span> chol_Q_e)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>Q_e <span class="ot">&lt;-</span> <span class="fu">bdiag</span>(d_fit<span class="sc">$</span>hess)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>chol_Q_e <span class="ot">&lt;-</span> <span class="fu">Cholesky</span>(Q_e)</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>pi_y_cond_x_theta <span class="ot">&lt;-</span> <span class="cf">function</span>(y, Z, x, chol_Q_e) {</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">dmvn.sparse</span>(</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">x =</span> <span class="fu">t</span>(y), </span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">mu =</span> <span class="fu">as.vector</span>(Z <span class="sc">%*%</span> x), </span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">CH =</span> chol_Q_e,</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>        <span class="at">prec =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>        <span class="at">log =</span> <span class="cn">TRUE</span></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a><span class="fu">pi_y_cond_x_theta</span>(<span class="at">y =</span> y, <span class="at">Z =</span> Z, <span class="at">x =</span> x, <span class="at">chol_Q_e =</span> chol_Q_e)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] -105787.3</code></pre>
 </div>
 </div>
 </section>
-<section id="px-theta" class="level3" data-number="5.1.3">
-<h3 data-number="5.1.3" class="anchored" data-anchor-id="px-theta"><span class="header-section-number">5.1.3</span> 3. <span class="math inline">\(p(x | \theta)\)</span></h3>
+<section id="px-theta" class="level4" data-number="1.4.1.3">
+<h4 data-number="1.4.1.3" class="anchored" data-anchor-id="px-theta"><span class="header-section-number">1.4.1.3</span> 3. <span class="math inline">\(p(x | \theta)\)</span></h4>
 <p><span class="math display">\[
 p(x | \theta)  = N(x | \mu_x, Q_x^{-1})
 \]</span></p>
 <div class="cell" data-hash="index_cache/html/unnamed-chunk-12_6cb7e6c2dc00e66817cd9d7d809ee02d">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>pi_x_cond_theta <span class="ot">&lt;-</span> <span class="cf">function</span>(x, mu_x, chol_Q_x) {</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">dmvn.sparse</span>(<span class="at">x =</span> <span class="fu">t</span>(x),</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">mu =</span> <span class="fu">as.vector</span>(mu_x),</span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>                <span class="at">CH =</span> chol_Q_x,</span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>                <span class="at">prec =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>                <span class="at">log =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a><span class="fu">pi_x_cond_theta</span>(<span class="at">x =</span> x, <span class="at">mu_x =</span> mu_x, <span class="at">chol_Q_x =</span> chol_Q_x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>pi_x_cond_theta <span class="ot">&lt;-</span> <span class="cf">function</span>(x, mu_x, chol_Q_x) {</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">dmvn.sparse</span>(<span class="at">x =</span> <span class="fu">t</span>(x),</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">mu =</span> <span class="fu">as.vector</span>(mu_x),</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>                <span class="at">CH =</span> chol_Q_x,</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>                <span class="at">prec =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>                <span class="at">log =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a><span class="fu">pi_x_cond_theta</span>(<span class="at">x =</span> x, <span class="at">mu_x =</span> mu_x, <span class="at">chol_Q_x =</span> chol_Q_x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] -659.8415</code></pre>
 </div>
 </div>
 <div class="cell" data-hash="index_cache/html/unnamed-chunk-13_817e88feec266aacff5145bc21e31b67">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>pi_theta <span class="ot">&lt;-</span> <span class="cf">function</span>(theta) <span class="dv">1</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>pi_theta_cond_y <span class="ot">&lt;-</span> <span class="cf">function</span>(theta, y, x, mu_x, chol_Q_x, Z, chol_Q_e,</span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>                            mu_x_cond_y, chol_Q_x_cond_y) {</span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pi_theta</span>(theta) <span class="sc">*</span> </span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>        <span class="fu">pi_y_cond_x_theta</span>(<span class="at">y =</span> y, <span class="at">Z =</span> Z, <span class="at">x =</span> x, <span class="at">chol_Q_e =</span> chol_Q_e) <span class="sc">*</span> </span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>        <span class="fu">pi_x_cond_theta</span>(<span class="at">x =</span> x, <span class="at">mu_x =</span> mu_x, <span class="at">chol_Q_x =</span> chol_Q_x) <span class="sc">/</span></span>
-<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>        <span class="fu">pi_x_cond_theta_y</span>(<span class="at">x =</span> x, <span class="at">mu_x_cond_y =</span> mu_x_cond_y, <span class="at">chol_Q_x_cond_y =</span> chol_Q_x_cond_y)</span>
-<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a><span class="fu">pi_theta_cond_y</span>(</span>
-<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">theta =</span> theta, </span>
-<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> y,</span>
-<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> x, </span>
-<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">mu_x =</span> mu_x, </span>
-<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">chol_Q_x =</span> chol_Q_x, </span>
-<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">Z =</span> Z,</span>
-<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a>    chol_Q_e, </span>
-<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a>    mu_x_cond_y,</span>
-<span id="cb21-19"><a href="#cb21-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">chol_Q_x_cond_y =</span> chol_Q_x_cond_y</span>
-<span id="cb21-20"><a href="#cb21-20" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>pi_theta <span class="ot">&lt;-</span> <span class="cf">function</span>(theta) <span class="dv">1</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>pi_theta_cond_y <span class="ot">&lt;-</span> <span class="cf">function</span>(theta, y, x, mu_x, chol_Q_x, Z, chol_Q_e,</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>                            mu_x_cond_y, chol_Q_x_cond_y) {</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pi_theta</span>(theta) <span class="sc">*</span> </span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>        <span class="fu">pi_y_cond_x_theta</span>(<span class="at">y =</span> y, <span class="at">Z =</span> Z, <span class="at">x =</span> x, <span class="at">chol_Q_e =</span> chol_Q_e) <span class="sc">*</span> </span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>        <span class="fu">pi_x_cond_theta</span>(<span class="at">x =</span> x, <span class="at">mu_x =</span> mu_x, <span class="at">chol_Q_x =</span> chol_Q_x) <span class="sc">/</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>        <span class="fu">pi_x_cond_theta_y</span>(<span class="at">x =</span> x, <span class="at">mu_x_cond_y =</span> mu_x_cond_y, <span class="at">chol_Q_x_cond_y =</span> chol_Q_x_cond_y)</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a><span class="fu">pi_theta_cond_y</span>(</span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">theta =</span> theta, </span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> y,</span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> x, </span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">mu_x =</span> mu_x, </span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">chol_Q_x =</span> chol_Q_x, </span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">Z =</span> Z,</span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>    chol_Q_e, </span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a>    mu_x_cond_y,</span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">chol_Q_x_cond_y =</span> chol_Q_x_cond_y</span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] -655.1651</code></pre>
 </div>
 </div>
 </section>
 </section>
-<section id="sample-mu_x-and-q_x-given-theta-and-hateta" class="level2" data-number="5.2">
-<h2 data-number="5.2" class="anchored" data-anchor-id="sample-mu_x-and-q_x-given-theta-and-hateta"><span class="header-section-number">5.2</span> 2. Sample <span class="math inline">\(\mu_x\)</span> and <span class="math inline">\(Q_x\)</span> given <span class="math inline">\(\theta\)</span> and <span class="math inline">\(\hat\eta\)</span></h2>
+<section id="sample-mu_x-and-q_x-given-theta-and-hateta" class="level3" data-number="1.4.2">
+<h3 data-number="1.4.2" class="anchored" data-anchor-id="sample-mu_x-and-q_x-given-theta-and-hateta"><span class="header-section-number">1.4.2</span> 2. Sample <span class="math inline">\(\mu_x\)</span> and <span class="math inline">\(Q_x\)</span> given <span class="math inline">\(\theta\)</span> and <span class="math inline">\(\hat\eta\)</span></h3>
 <div class="cell" data-hash="index_cache/html/unnamed-chunk-14_0fe794a023ccc5552d96ad35cce9b722">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>Q_x_cond_y <span class="ot">&lt;-</span> Q_x <span class="sc">+</span> <span class="fu">t</span>(Z) <span class="sc">%*%</span> Q_e <span class="sc">%*%</span> Z</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>chol_Q_x_cond_y <span class="ot">&lt;-</span> <span class="fu">Cholesky</span>(Q_x_cond_y)</span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>mu_x_cond_y <span class="ot">&lt;-</span> <span class="fu">solve</span>(Q_x_cond_y, Q_x <span class="sc">%*%</span> mu_x <span class="sc">+</span> <span class="fu">t</span>(Z) <span class="sc">%*%</span> Q_e <span class="sc">%*%</span> y)</span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="fu">rmvn.sparse</span>(</span>
-<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">n =</span> <span class="dv">1</span>,</span>
-<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">mu =</span> mu_x_cond_y,</span>
-<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">CH =</span> chol_Q_x_cond_y,</span>
-<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">prec =</span> <span class="cn">TRUE</span></span>
-<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details open="">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>Q_x_cond_y <span class="ot">&lt;-</span> Q_x <span class="sc">+</span> <span class="fu">t</span>(Z) <span class="sc">%*%</span> Q_e <span class="sc">%*%</span> Z</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>chol_Q_x_cond_y <span class="ot">&lt;-</span> <span class="fu">Cholesky</span>(Q_x_cond_y)</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>mu_x_cond_y <span class="ot">&lt;-</span> <span class="fu">solve</span>(Q_x_cond_y, Q_x <span class="sc">%*%</span> mu_x <span class="sc">+</span> <span class="fu">t</span>(Z) <span class="sc">%*%</span> Q_e <span class="sc">%*%</span> y)</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="fu">rmvn.sparse</span>(</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">n =</span> <span class="dv">1</span>,</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">mu =</span> mu_x_cond_y,</span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">CH =</span> chol_Q_x_cond_y,</span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">prec =</span> <span class="cn">TRUE</span></span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>1 x 4 Matrix of class "dgeMatrix"
          [,1]      [,2]       [,3]      [,4]
