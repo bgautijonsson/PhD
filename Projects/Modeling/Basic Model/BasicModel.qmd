@@ -1,0 +1,310 @@
+---
+title: "Untitled"
+format: html
+editor: source
+---
+
+```{r}
+#| include: false
+
+library(tidyverse)
+library(cmdstanr)
+library(posterior)
+library(bayesplot)
+library(ggthemes)
+library(scales)
+library(cowplot)
+library(here)
+theme_set(theme_cowplot())
+```
+
+# Data
+
+```{r}
+d <- here("Data", "yearly_maximum_per_hour.csv") |> 
+    read_csv() |> 
+    filter(year <= 2020)
+
+y <- d |> filter(station == 1) |> 
+    pull(precip)
+```
+
+# Fit GEV
+
+```{r}
+log_lik <- function(y, par) {
+    
+    mu <- exp(par[1])
+    sigma <- exp(par[2]) * mu
+    xi <- (1 - exp(-exp((par[3] - 0.062)/0.4)))^(1/0.8) - 1/2
+    
+    m <- length(y)
+    
+    z <- (y - mu) / sigma
+    
+    if (any(1 + xi * z <= 0)) return(Inf)
+    
+    
+    out <- - m * log(sigma) 
+    out <- out - (1 + 1/xi) * sum(log(1 + xi * z))
+    out <- out - sum((1 + xi * z)^{-1/xi})
+    
+    
+    
+    -out
+}
+```
+
+
+
+
+
+```{r}
+f <- function(x, mu, sigma, xi) {
+    exp(-(1 + xi * (x - mu) / sigma)^{-1/xi})
+}
+
+fit_gev <- function(data, ...) {
+    
+    y <- data$y
+    
+    opt <- optim(log_lik, par = c(0, 0, 0), y = y)
+    
+    par <- opt$par
+    mu <- exp(par[1])
+    sigma <- exp(par[2]) * mu
+    xi <- 1 / (1 + exp(-par[3])) - 0.5
+    
+    tibble(year = data$year, 
+           y = y, 
+           mu = mu, 
+           sigma = sigma,
+           xi = xi,
+           psi = par[1],
+           tau = par[2],
+           phi = par[3]) |> 
+        arrange(y) |> 
+        mutate(g_tilde = row_number() / (n() + 1),
+               g_hat = f(y, mu = mu, sigma = sigma, xi = xi))
+    
+}
+```
+
+```{r, fig.width = 10, fig.asp = 0.5, out.width = "100%"}
+d |> 
+    filter(station <= 5) |> 
+    select(year, y = precip, station) |> 
+    group_by(station) |> 
+    group_modify(fit_gev) |> 
+    ggplot(aes(g_tilde, g_hat)) + 
+    geom_abline(intercept = 0, slope = 1, lty = 1) +
+    geom_point() +
+    facet_wrap("station")
+```
+
+
+```{r, fig.width = 10, fig.asp = 0.5, out.width = "100%"}
+d |> 
+    filter(station <= 300) |> 
+    select(year, y = precip, station) |> 
+    group_by(station) |> 
+    group_modify(fit_gev) |> 
+    distinct(station, mu, sigma, xi) |> 
+    pivot_longer(c(-station)) |> 
+    ggplot(aes(value)) + 
+    geom_histogram(bins = 40) +
+    facet_wrap("name", scales = "free")
+```
+
+```{r, fig.width = 10, fig.asp = 0.5, out.width = "100%"}
+d |> 
+    filter(station <= 300) |> 
+    select(year, y = precip, station) |> 
+    group_by(station) |> 
+    group_modify(fit_gev) |> 
+    distinct(station, psi, tau, phi) |> 
+    pivot_longer(c(-station)) |> 
+    ggplot(aes(value)) + 
+    geom_histogram(bins = 40) +
+    facet_wrap("name", scales = "free")
+```
+
+## With Trend
+
+```{r}
+log_lik_trend <- function(dat, par) {
+    
+    y <- dat$y
+    t <- dat$year
+    t <- t - 1981
+    
+    mu0 <- exp(par[1])
+    sigma <- exp(par[2]) * mu0
+    xi <- 1 / (1 + exp(-par[3])) - 0.5
+    delta <- 0.016 * 1 / (1 + exp(-par[4])) - 0.008
+    
+    mu <- mu0 * (1 + delta * t)
+    
+    m <- length(y)
+    
+    z <- (y - mu) / sigma
+    
+    if (any(1 + xi * z <= 0)) return(10000)
+    
+    
+    out <- - m * log(sigma) 
+    out <- out - (1 + 1/xi) * sum(log(1 + xi * z))
+    out <- out - sum((1 + xi * z)^{-1/xi})
+    
+    
+    
+    -out
+}
+
+```
+
+```{r}
+GEV_fit <- nlm(f = log_lik_trend, p = c(0, 0, 0.1, 0), hessian = T,
+    dat = d |> filter(station == 1) |> rename(y = precip))
+
+solve(-GEV_fit$hessian)
+```
+
+```{r}
+f_trend <- function(x, t, mu0, sigma, xi, delta) {
+    t <- t - 1981
+    mu <- mu0 * (1 + delta * t)
+    exp(-(1 + xi * (x - mu) / sigma)^{-1/xi})
+}
+
+fit_gev_trend <- function(data, ...) {
+    
+    y <- data$y
+    
+    opt <- optim(log_lik, par = c(0, 0, 0, 0), y = y)
+    
+    par <- opt$par
+    mu <- exp(par[1])
+    sigma <- exp(par[2]) * mu
+    xi <- (1 - exp(-exp((par[3] - 0.062)/0.4)))^(1/0.8) - 1/2
+    delta <- 0.016 * 1 / (1 + exp(-par[4])) - 0.008
+    
+    tibble(year = data$year, 
+           y = y, 
+           mu = mu, 
+           sigma = sigma,
+           xi = xi,
+           delta = delta,
+           psi = par[1],
+           tau = par[2],
+           phi = par[3],
+           gamma = par[4]) |> 
+        arrange(y) |> 
+        mutate(g_tilde = row_number() / (n() + 1),
+               g_hat = f_trend(x = y, t = year, 
+                               mu = mu, sigma = sigma, xi = xi, delta = delta))
+    
+}
+```
+
+```{r, fig.width = 10, fig.asp = 0.5, out.width = "100%"}
+d_fit <- d |> 
+    filter(station <= 100) |>
+    select(year, y = precip, station) |> 
+    group_by(station) |> 
+    group_modify(fit_gev_trend)
+
+d_fit |> 
+    ggplot(aes(g_tilde, g_hat)) + 
+    geom_abline(intercept = 0, slope = 1, lty = 2) +
+    geom_line(aes(group = station), alpha = 0.1)
+```
+
+```{r, fig.width = 10, fig.asp = 0.5, out.width = "100%"}
+d_fit |> 
+    distinct(station, mu, sigma, xi, delta) |> 
+    pivot_longer(c(-station)) |> 
+    ggplot(aes(value)) +
+    geom_histogram(bins = 50) +
+    facet_wrap("name", scales = "free")
+```
+
+```{r, fig.width = 10, fig.asp = 0.5, out.width = "100%"}
+d_fit |> 
+    distinct(station, psi, tau, phi, gamma) |> 
+    pivot_longer(c(-station)) |> 
+    ggplot(aes(value)) +
+    geom_histogram(bins = 50) +
+    facet_wrap("name", scales = "free")
+```
+
+# Stan
+
+## No Trend
+
+```{r}
+stan_d <- d |> 
+    filter(station <= 500)
+
+stan_mod <- here("Projects", "Modeling", 
+                 "Basic Model", "BasicModel.stan") |> 
+    cmdstan_model()
+
+stan_data <- list(
+    N_obs = nrow(stan_d),
+    N_stations = length(unique(stan_d$station)),
+    y = stan_d$precip,
+    year = stan_d$year - 1981,
+    station = as.integer(stan_d$station),
+    log_min_y = stan_d |> group_by(station) |> summarise(log_min_y =log(min(precip))) |> pull(log_min_y)
+)
+
+stan_fit <- stan_mod$sample(data = stan_data, 
+                            init = 0, 
+                            parallel_chains = 4)
+```
+
+```{r, fig.width = 10, fig.asp = 0.5, out.width = "100%"}
+my_draws <- stan_fit$draws()
+
+my_draws |> 
+    subset_draws(c("mu", "sigma", "xi")) |> 
+    summarise_draws("median") |> 
+    select(variable, median) |> 
+    mutate(station = str_match(variable, "([0-9]+)")[, 2] |> parse_number(),
+           variable = str_match(variable, "^[a-z]+")) |> 
+    pivot_wider(names_from = variable, values_from = median) |> 
+    select(-station) |> 
+    GGally::ggpairs()
+```
+
+```{r, fig.width = 10, fig.asp = 0.5, out.width = "100%"}
+my_draws |> 
+    subset_draws(c("psi", "tau", "phi")) |> 
+    summarise_draws("median") |> 
+    select(variable, median) |> 
+    mutate(station = str_match(variable, "([0-9]+)")[, 2] |> parse_number(),
+           variable = str_match(variable, "^[a-z]+")) |> 
+    ggplot(aes(median)) +
+    geom_histogram(bins = 30) +
+    facet_wrap("variable", scales = "free")
+```
+
+```{r}
+my_draws |> 
+    subset_draws(c("psi", "tau", "phi")) |> 
+    summarise_draws("median") |> 
+    select(variable, median) |> 
+    mutate(station = str_match(variable, "([0-9]+)")[, 2] |> parse_number(),
+           variable = str_match(variable, "^[a-z]+")) |> 
+    pivot_wider(names_from = variable, values_from = median) |> 
+    select(-station) |> 
+    GGally::ggpairs()
+```
+
+
+
+```{r, fig.width = 10, fig.asp = 0.5, out.width = "100%"}
+my_draws |> 
+    mcmc_pairs(pars = c("psi_mean", "tau_mean", "phi_mean"))
+```

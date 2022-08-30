@@ -1,0 +1,3 @@
+# Preface {.unnumbered}
+
+This online book contains my notes and computations for my PhD project titled *Improved 21st century projections of sub-daily extreme precipitation by spatio-temporal recalibration*.

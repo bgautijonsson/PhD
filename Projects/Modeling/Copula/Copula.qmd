@@ -1,0 +1,274 @@
+---
+title: "Untitled"
+format: html
+editor: source
+---
+
+```{r}
+#| include: false
+
+library(tidyverse)
+library(cmdstanr)
+library(posterior)
+library(bayesplot)
+library(ggthemes)
+library(scales)
+library(cowplot)
+library(here)
+library(GGally)
+theme_set(theme_cowplot())
+```
+
+# Data
+
+```{r}
+d <- here("Data", "yearly_maximum_per_hour.csv") |> 
+    read_csv() 
+
+```
+
+
+# Fit GEV with trend
+
+```{r}
+log_lik_trend <- function(dat, par) {
+    
+    y <- dat$y
+    t <- dat$year
+    t <- t - 1981
+    
+    mu0 <- exp(par[1])
+    sigma <- exp(par[2]) * mu0
+    xi <- 1 / (1 + exp(-par[3])) - 0.5
+    delta <- 0.016 * 1 / (1 + exp(-par[4])) - 0.008
+    
+    mu <- mu0 * (1 + delta * t)
+    
+    m <- length(y)
+    
+    z <- (y - mu) / sigma
+    
+    if (any(1 + xi * z <= 0)) return(Inf)
+    
+    
+    out <- - m * log(sigma) 
+    out <- out - (1 + 1/xi) * sum(log(1 + xi * z))
+    out <- out - sum((1 + xi * z)^{-1/xi})
+    
+    
+    
+    -out
+}
+```
+
+```{r}
+f_trend <- function(x, t, mu0, sigma, xi, delta) {
+    t <- t - 1981
+    mu <- mu0 * (1 + delta * t)
+    exp(-(1 + xi * (x - mu) / sigma)^{-1/xi})
+}
+
+fit_gev_trend <- function(data, ...) {
+    
+    y <- data$y
+    
+    opt <- optim(log_lik_trend, par = c(0, 0, 0.1, 0), dat = data)
+    
+    par <- opt$par
+    mu <- exp(par[1])
+    sigma <- exp(par[2]) * mu
+    xi <- 1 / (1 + exp(-par[3])) - 0.5
+    delta <- 0.016 * 1 / (1 + exp(-par[4])) - 0.008
+    
+    tibble(year = data$year, 
+           y = y, 
+           mu = mu, 
+           sigma = sigma,
+           xi = xi,
+           delta = delta,
+           psi = par[1],
+           tau = par[2],
+           phi = par[3],
+           gamma = par[4],
+           error = y - (mu * (1 + delta * (year - 1981)))) |> 
+        arrange(error) |> 
+        mutate(g_tilde = row_number() / (n() + 1),
+               g_hat = f_trend(x = y, t = year, 
+                               mu = mu, sigma = sigma, xi = xi, delta = delta))
+    
+}
+```
+
+```{r, fig.width = 10, fig.asp = 0.5, out.width = "100%"}
+d_fit <- d |> 
+    filter(proj_x <= 50, proj_y <= 50) |>
+    select(year, y = precip, station, proj_x, proj_y) |> 
+    group_by(station, proj_x, proj_y) |> 
+    group_modify(fit_gev_trend) |> 
+    ungroup()
+```
+
+
+# Figures
+
+## Goodness of fit
+
+```{r, fig.width = 10, fig.asp = 0.5, out.width = "100%"}
+d_fit |> 
+    filter(station %in% sample(station, size = 12)) |>
+    # top_n(n = 12, wt = -xi) |> 
+    ggplot(aes(g_tilde, g_hat, group = station)) + 
+    geom_abline(intercept = 0, slope = 1, lty = 2) +
+    geom_point(aes(group = station), alpha = 1) +
+    facet_wrap("station")
+```
+## Parameter values
+
+### Original scale
+
+```{r, fig.width = 10, fig.asp = 0.5, out.width = "100%"}
+d_fit |> 
+    distinct(station, mu, sigma, xi, delta) |> 
+    pivot_longer(c(-station)) |> 
+    ggplot(aes(value)) +
+    geom_histogram(bins = 50) +
+    facet_wrap("name", scales = "free")
+```
+
+### Transformed
+
+```{r, fig.width = 12, fig.asp = 0.5, out.width = "100%"}
+d_fit |> 
+    distinct(station, psi, tau, phi, gamma) |> 
+    pivot_longer(c(-station)) |> 
+    ggplot(aes(value)) +
+    geom_histogram(bins = 50) +
+    facet_wrap("name", scales = "free")
+```
+### Pairs plot
+
+#### Original scale
+
+```{r, fig.width = 12}
+d_fit |> 
+    distinct(station, mu, sigma, xi, delta) |> 
+    select(-station) |> 
+    ggpairs()
+```
+
+#### Transformed
+
+```{r, fig.width = 10}
+d_fit |> 
+    distinct(station, psi, tau, phi, gamma) |> 
+    filter(psi > quantile(psi, 0.05),
+           psi < quantile(psi, 0.95),
+           tau > quantile(tau, 0.05),
+           tau < quantile(tau, 0.95),
+           phi > quantile(phi, 0.05),
+           phi < quantile(phi, 0.95),
+           gamma > quantile(gamma, 0.05),
+           gamma < quantile(gamma, 0.95)) |> 
+    select(-station) |> 
+    ggpairs()
+```
+
+# Fitting a t-copula
+
+```{r}
+side_length <- 6
+
+d_proj <- d |> 
+    distinct(station, proj_x, proj_y) |> 
+    filter(proj_x <= side_length, proj_y <= side_length) |> 
+    mutate(station = row_number())
+
+station <- d_proj$station
+proj_x <- d_proj$proj_x
+proj_y <- d_proj$proj_y
+
+
+
+
+i <- 15
+
+cur_x <- proj_x[i]
+cur_y <- proj_y[i]
+
+
+neighbours <- d_proj |> 
+    filter(abs(proj_x - cur_x) <= 2,
+           abs(proj_y - cur_y) <= 2,
+           abs(proj_x - cur_x) + abs(proj_y - cur_y) <= 2) |> 
+    pull(station)
+
+d_proj |> 
+    mutate(station = ifelse(station %in% neighbours, station, "")) |> 
+    pivot_wider(names_from = proj_y, values_from = station) |> 
+    select(-proj_x)
+```
+
+```{r}
+d_proj |> 
+    pivot_wider(names_from = proj_y, values_from = station) |> 
+    select(-proj_x)
+```
+
+
+```{r}
+d_proj <-  d |> 
+    distinct(station, proj_x, proj_y) |> 
+    filter(proj_x <= 50, proj_y <= 50) |> 
+    mutate(station = row_number())
+
+
+neighbors <- list()
+
+for (i in seq_len(nrow(d_proj))) {
+    cur_station <- d_proj |> slice(i)
+    cur_x <- cur_station$proj_x
+    cur_y <- cur_station$proj_y
+    
+    cur_neighbors <- d_proj |> 
+        filter(abs(proj_x - cur_x) <= 2,
+           abs(proj_y - cur_y) <= 2,
+           abs(proj_x - cur_x) + abs(proj_y - cur_y) <= 2,
+           station != i) |> 
+        pull(station)
+    
+    neighbors[[i]] <- tibble(neighbors = cur_neighbors)
+    
+}
+
+d_proj |> 
+    mutate(neighbors = neighbors)
+```
+
+
+
+```{r}
+d_proj <- d |> 
+    distinct(station, proj_x, proj_y) |> 
+    filter(proj_x <= 4, proj_y <= 4) |> 
+    mutate(station = row_number())
+
+station <- d_proj$station
+proj_x <- d_proj$proj_x
+proj_y <- d_proj$proj_y
+
+n_row <- length(proj_x)
+n_col <- length(proj_y)
+
+mat <- matrix(0, nrow = n_row, ncol = n_col)
+
+mat
+
+```
+
+```{r}
+matrix(0,
+       nrow = n_row * n_col,
+       ncol = n_row * n_col)
+```
+
+
